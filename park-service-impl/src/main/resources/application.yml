@@ -1,0 +1,37 @@
+spring:
+  profiles:
+    active: dev
+  freemarker:
+    cache: false
+  main:
+    allow-bean-definition-overriding: true
+    ## 不使用 web 环境
+    web-application-type: none
+
+dubbo:
+  application:
+    name: service-provider
+    logger: slf4j
+  scan:
+    base-packages: com.epipe
+  provider:
+    version: 1.0.0
+    timeout: 5000
+    dynamic: true
+mybatis:
+    type-aliases-package: com.epipe.entity
+    mapper-locations: classpath*:mapper/*/*.xml
+    configuration:
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+mapper:
+  mappers:
+    - tk.mybatis.mapper.common.Mapper
+    - com.epipe.common.base.BaseMapper
+  not-empty: true
+  identity: MYSQL
+# mybatis 分页插件
+pagehelper:
+  helperDialect: mysql
+  reasonable: false
+  supportMethodsArguments: true
+  params: count=countSql
